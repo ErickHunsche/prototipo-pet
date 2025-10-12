@@ -1,0 +1,35 @@
+.action-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1.5rem;
+    padding: 0.4rem;
+    background-color: #0a4d8c;
+    border-top-left-radius: 1rem;
+    border-top-right-radius: 1rem;
+    overflow: hidden;
+    /* faz sobrepor a imagem */
+    margin-top: -1rem;
+    /* ajusta o valor conforme o quanto quer sobrepor */
+    position: relative;
+    z-index: 10;
+    /* garante que fique acima da imagem */
+
+}
+
+.left-actions {
+    display: flex;
+    gap: 1rem;
+    /* espaço entre os 3 primeiros */
+}
+
+h2{
+ font-size: 1.1rem;
+ text-align: center;
+}
+
+.voltar{
+
+    background-color: #0a4d8c;
+    padding: 12px;
+}

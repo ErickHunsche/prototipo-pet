@@ -1,9 +1,13 @@
 "use client"
 
 import { useState } from "react"
-import { ChevronLeft } from "lucide-react"
+import { ChevronLeft, Calendar as CalendarIcon } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { Popover, PopoverTrigger, PopoverContent } from "@/components/ui/popover"
+import { Calendar } from "@/components/ui/calendar"
+import { cn } from "@/lib/utils"
 import type { User, Pet } from "@/lib/mock-data"
+import "./ui/home.css"
 
 interface PetSelectionScreenProps {
   onBack: () => void
@@ -15,6 +19,7 @@ export function PetSelectionScreen({ onBack, user, pets }: PetSelectionScreenPro
   const [selectedPet, setSelectedPet] = useState<string | null>(null)
   const [selectedTime, setSelectedTime] = useState<string | null>(null)
   const [specialCare, setSpecialCare] = useState("")
+  const [date, setDate] = useState<Date | undefined>(new Date("2025-11-14"))
 
   const displayPets = [
     ...pets.map((pet) => ({
@@ -39,24 +44,29 @@ export function PetSelectionScreen({ onBack, user, pets }: PetSelectionScreenPro
     }
 
     const selectedPetData = pets.find((p) => p.id === selectedPet)
+    const formattedDate = date
+      ? date.toLocaleDateString("pt-BR", { day: "2-digit", month: "long", year: "numeric" })
+      : "Data não selecionada"
 
     console.log("[v0] Agendamento confirmado:", {
       user: user.name,
       pet: selectedPetData?.name,
-      date: "14/11/2025",
+      date: formattedDate,
       time: selectedTime,
       specialCare: specialCare || "Nenhum",
     })
 
     alert(
-      `Agendamento confirmado!\n\nCliente: ${user.name}\nPet: ${selectedPetData?.name}\nData: 14/11/2025\nHorário: ${selectedTime}${specialCare ? `\nCuidados especiais: ${specialCare}` : ""}`,
+      `Agendamento confirmado!\n\nCliente: ${user.name}\nPet: ${selectedPetData?.name}\nData: ${formattedDate}\nHorário: ${selectedTime}${
+        specialCare ? `\nCuidados especiais: ${specialCare}` : ""
+      }`,
     )
   }
 
   return (
-    <div className="min-h-screen bg-[#fefae0]">
+    <div className="min-h-screen bg-[#1d6fb8]">
       {/* Header */}
-      <div className="bg-[#540804] text-white p-4 flex items-center gap-3">
+      <div className="voltar">
         <button onClick={onBack}>
           <ChevronLeft className="w-6 h-6" />
         </button>
@@ -72,7 +82,7 @@ export function PetSelectionScreen({ onBack, user, pets }: PetSelectionScreenPro
 
         {/* Service Card */}
         <div className="bg-white rounded-lg p-4 flex gap-4">
-          <img src="/pet-grooming-simple.jpg" alt="Banho simples" className="w-20 h-20 rounded-lg object-cover" />
+          <img src="/dog-grooming.png" alt="Banho simples" className="w-20 h-20 rounded-lg object-cover" />
           <div>
             <h3 className="font-semibold text-[#540804]">Banho simples</h3>
             <p className="text-sm text-[#2d0909]">Valor referente ao porte</p>
@@ -80,20 +90,45 @@ export function PetSelectionScreen({ onBack, user, pets }: PetSelectionScreenPro
         </div>
 
         {/* Date Display */}
-        <div className="text-center">
+        <div className="text-center space-y-3">
           <p className="text-[#540804] font-medium">Selecione o dia disponível</p>
-          <p className="text-2xl font-bold text-[#540804]">14, Novembro, 2025</p>
+
+          <Popover>
+            <PopoverTrigger asChild>
+              <Button
+                variant="outline"
+                className={cn(
+                  "w-[250px] justify-center bg-white border border-[#d4a373] text-[#540804] hover:bg-[#e9edc9]",
+                  !date && "text-muted-foreground",
+                )}
+              >
+                <CalendarIcon className="mr-2 h-4 w-4" />
+                {date
+                  ? date.toLocaleDateString("pt-BR", {
+                      day: "2-digit",
+                      month: "long",
+                      year: "numeric",
+                    })
+                  : "Selecione uma data"}
+              </Button>
+            </PopoverTrigger>
+            <PopoverContent className="w-auto p-0 bg-white rounded-lg border border-[#d4a373]" align="center">
+              <Calendar mode="single" selected={date} onSelect={setDate} initialFocus />
+            </PopoverContent>
+          </Popover>
         </div>
 
         {/* Pet Selection */}
         <div>
           <h3 className="font-semibold text-[#540804] mb-3">Selecione seu PET</h3>
-          <div className="flex gap-4">
+          <div className="flex gap-4 flex-wrap">
             {displayPets.map((pet) => (
               <button
                 key={pet.id}
                 onClick={() => setSelectedPet(pet.id)}
-                className={`flex flex-col items-center gap-2 ${selectedPet === pet.id ? "opacity-100" : "opacity-60"}`}
+                className={`flex flex-col items-center gap-2 ${
+                  selectedPet === pet.id ? "opacity-100" : "opacity-60"
+                }`}
               >
                 {pet.image ? (
                   <img
@@ -122,12 +157,11 @@ export function PetSelectionScreen({ onBack, user, pets }: PetSelectionScreenPro
                   <button
                     key={time}
                     onClick={() => setSelectedTime(time)}
-                    className={`
-                      py-2 rounded text-sm font-medium
-                      ${
-                        selectedTime === time ? "bg-[#d4a373] text-white" : "bg-white text-[#540804] hover:bg-[#e9edc9]"
-                      }
-                    `}
+                    className={`py-2 rounded text-sm font-medium ${
+                      selectedTime === time
+                        ? "bg-[#d4a373] text-white"
+                        : "bg-white text-[#540804] hover:bg-[#e9edc9]"
+                    }`}
                   >
                     {time}
                   </button>
@@ -137,6 +171,7 @@ export function PetSelectionScreen({ onBack, user, pets }: PetSelectionScreenPro
           </div>
         </div>
 
+        {/* Cuidados especiais */}
         <div>
           <label className="block text-sm text-[#540804] mb-2">Algum cuidado especial com o pet?</label>
           <input
@@ -148,9 +183,10 @@ export function PetSelectionScreen({ onBack, user, pets }: PetSelectionScreenPro
           />
         </div>
 
+        {/* Confirm Button */}
         <Button
           onClick={handleConfirmBooking}
-          className="w-full bg-[#540804] hover:bg-[#2d0909] text-white py-6 text-base"
+          className="w-full bg-[#fff] hover:bg-[#2d0909] text-black py-6 text-base"
         >
           Confirmar Agendamento
         </Button>

@@ -3,6 +3,7 @@
 import { useState } from "react"
 import { ChevronLeft } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import './ui/home.css'
 
 interface ServicesScreenProps {
   onBack: () => void
@@ -28,9 +29,9 @@ export function ServicesScreen({ onBack, onNext }: ServicesScreenProps) {
   ]
 
   return (
-    <div className="min-h-screen bg-[#fefae0]">
+    <div className="min-h-screen bg-[#1d6fb8]">
       {/* Header */}
-      <div className="bg-[#540804] text-white p-4 flex items-center gap-3">
+      <div className="voltar">
         <button onClick={onBack}>
           <ChevronLeft className="w-6 h-6" />
         </button>
@@ -40,9 +41,9 @@ export function ServicesScreen({ onBack, onNext }: ServicesScreenProps) {
       <div className="p-6 space-y-6">
         {/* Service Card */}
         <div className="bg-white rounded-lg p-4 flex gap-4">
-          <img src="/pet-hotel.png" alt="Hospedagem" className="w-20 h-20 rounded-lg object-cover" />
+          {/* <img src="/pet-hotel.png" alt="Hospedagem" className="w-20 h-20 rounded-lg object-cover" /> */}
           <div>
-            <h3 className="font-semibold text-[#540804]">Hospedagem</h3>
+            <h3 className="font-semibold text-[#540804]">Banho</h3>
             <p className="text-sm text-[#2d0909]">Valor referente ao porte</p>
           </div>
         </div>
@@ -105,7 +106,7 @@ export function ServicesScreen({ onBack, onNext }: ServicesScreenProps) {
           </div>
         </div>
 
-        <Button onClick={onNext} className="w-full bg-[#540804] hover:bg-[#2d0909] text-white py-6 text-base">
+        <Button onClick={onNext} className="w-full bg-[#fff] hover:bg-[#2d0909] text-black py-6 text-base">
           Confirmar Agendamento
         </Button>
       </div>

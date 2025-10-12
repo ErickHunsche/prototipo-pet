@@ -20,8 +20,12 @@ export default function Page() {
   return (
     <div className="min-h-screen bg-[#fefae0]">
       {currentScreen === "home" && (
-        <HomeScreen onNavigate={() => setCurrentScreen("services")} onProfile={() => setCurrentScreen("profile")} />
+        <HomeScreen
+          onNavigate={() => setCurrentScreen("pet-selection")} 
+          onProfile={() => setCurrentScreen("profile")}
+        />
       )}
+
       {currentScreen === "services" && (
         <ServicesScreen
           onBack={() => setCurrentScreen("home")}
@@ -34,20 +38,35 @@ export default function Page() {
           }}
         />
       )}
+
       {currentScreen === "register" && (
-        <RegisterScreen onBack={() => setCurrentScreen("services")} onNext={() => setCurrentScreen("pet-register")} />
+        <RegisterScreen
+          onBack={() => setCurrentScreen("services")}
+          onNext={() => setCurrentScreen("pet-register")}
+        />
       )}
+
       {currentScreen === "pet-register" && (
         <PetRegisterScreen
           onBack={() => setCurrentScreen("register")}
           onNext={() => setCurrentScreen("pet-selection")}
         />
       )}
+
       {currentScreen === "pet-selection" && (
-        <PetSelectionScreen onBack={() => setCurrentScreen("services")} user={currentUser} pets={userPets} />
+        <PetSelectionScreen
+          onBack={() => setCurrentScreen("home")}
+          user={currentUser}
+          pets={userPets}
+        />
       )}
+
       {currentScreen === "profile" && (
-        <ProfileScreen onBack={() => setCurrentScreen("home")} user={currentUser} pets={userPets} />
+        <ProfileScreen
+          onBack={() => setCurrentScreen("home")}
+          user={currentUser}
+          pets={userPets}
+        />
       )}
     </div>
   )
