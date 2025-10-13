@@ -7,11 +7,12 @@ import type { User as UserType, Pet } from "@/lib/mock-data"
 
 interface ProfileScreenProps {
   onBack: () => void
+  onAddPet?: () => void
   user: UserType
   pets: Pet[]
 }
 
-export function ProfileScreen({ onBack, user, pets }: ProfileScreenProps) {
+export function ProfileScreen({ onBack, onAddPet, user, pets }: ProfileScreenProps) {
   return (
     <div className="min-h-screen bg-[#fefae0]">
       {/* Header */}
@@ -81,7 +82,9 @@ export function ProfileScreen({ onBack, user, pets }: ProfileScreenProps) {
         <div>
           <div className="flex items-center justify-between mb-4">
             <h2 className="text-xl font-bold text-[#540804]">Meus PETs</h2>
-            <Button className="bg-[#d4a373] hover:bg-[#c49363] text-white rounded-full px-6">Adicionar PET</Button>
+            <Button onClick={onAddPet} className="bg-[#d4a373] hover:bg-[#c49363] text-white rounded-full px-6">
+              Adicionar PET
+            </Button>
           </div>
 
           <div className="grid gap-4 md:grid-cols-2">

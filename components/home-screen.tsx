@@ -2,7 +2,7 @@
 
 import { Phone, MapPin, Share2, User } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import './ui/home.css'
+import "./ui/home.css"
 import { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 
@@ -12,6 +12,26 @@ interface HomeScreenProps {
 }
 
 export function HomeScreen({ onNavigate, onProfile }: HomeScreenProps) {
+  const handleCall = () => {
+    window.location.href = "tel:+5511987654321"
+  }
+
+  const handleVisit = () => {
+    window.open("https://maps.google.com/?q=Rua+das+Flores+123+São+Paulo+SP", "_blank")
+  }
+
+  const handleShare = () => {
+    if (navigator.share) {
+      navigator.share({
+        title: "Centro-PET",
+        text: "Confira o Centro-PET - Cuidados especiais para seu pet!",
+        url: window.location.href,
+      })
+    } else {
+      alert("Centro-PET\nRua das Flores, 123 - São Paulo, SP\nTelefone: (11) 98765-4321")
+    }
+  }
+
   return (
     <div className="min-h-screen flex flex-col">
       {/* Hero Section */}
@@ -27,19 +47,19 @@ export function HomeScreen({ onNavigate, onProfile }: HomeScreenProps) {
       {/* Action Buttons */}
       <div className="action-bar">
         <div className="left-actions">
-          <button className="flex flex-col items-center gap-1 text-[#000000]">
+          <button onClick={handleCall} className="flex flex-col items-center gap-1 text-[#000000]">
             <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center">
               <Phone className="w-5 h-5" />
             </div>
             <span className="text-xs text-[#fff]">Ligar</span>
           </button>
-          <button className="flex flex-col items-center gap-1 text-[#000000]">
+          <button onClick={handleVisit} className="flex flex-col items-center gap-1 text-[#000000]">
             <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center">
               <MapPin className="w-5 h-5" />
             </div>
             <span className="text-xs text-[#fff]">Visitar</span>
           </button>
-          <button className="flex flex-col items-center gap-1 text-[#000000]">
+          <button onClick={handleShare} className="flex flex-col items-center gap-1 text-[#000000]">
             <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center">
               <Share2 className="w-5 h-5" />
             </div>
@@ -79,10 +99,11 @@ export function HomeScreen({ onNavigate, onProfile }: HomeScreenProps) {
     </div>
   )
 }
+
 function ServiceItem({
   image,
   title,
-  subtitle
+  subtitle,
 }: {
   image: string
   title: string
@@ -92,10 +113,7 @@ function ServiceItem({
   const [showDetails, setShowDetails] = useState(false)
 
   return (
-    <div
-      className="relative overflow-hidden rounded-lg cursor-pointer"
-      onClick={() => setChecked(!checked)}
-    >
+    <div className="relative overflow-hidden rounded-lg cursor-pointer" onClick={() => setChecked(!checked)}>
       {/* Efeito circular */}
       <AnimatePresence>
         {checked && (
@@ -117,11 +135,7 @@ function ServiceItem({
         }`}
       >
         <div className="flex items-center gap-4 flex-1">
-          <img
-            src={image || "/placeholder.svg"}
-            alt={title}
-            className="w-16 h-16 rounded-lg object-cover"
-          />
+          <img src={image || "/placeholder.svg"} alt={title} className="w-16 h-16 rounded-lg object-cover" />
           <div>
             <h3 className="font-semibold text-[#000000]">{title}</h3>
             <p className="text-sm text-[#000000]">{subtitle}</p>
@@ -167,10 +181,7 @@ function ServiceItem({
               <li>Porte grande: R$ 60,00</li>
             </ul>
 
-            <Button
-              onClick={() => setShowDetails(false)}
-              className="mt-3 bg-[#1d6fb8] text-white hover:bg-[#134f84]"
-            >
+            <Button onClick={() => setShowDetails(false)} className="mt-3 bg-[#1d6fb8] text-white hover:bg-[#134f84]">
               Fechar
             </Button>
           </motion.div>
