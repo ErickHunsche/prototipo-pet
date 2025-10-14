@@ -46,7 +46,7 @@ export default function Page() {
   }
 
   return (
-    <div className="min-h-screen bg-[#fefae0] relative">
+    <div className="min-h-screen bg-[#fefae0] relative overflow-hidden">
       {/* Home screen always rendered as base */}
       <HomeScreen onNavigate={() => setCurrentScreen("pet-selection")} onProfile={() => setCurrentScreen("profile")} />
 
@@ -57,7 +57,7 @@ export default function Page() {
             initial="hidden"
             animate="visible"
             exit="exit"
-            className="fixed inset-0 z-50 bg-[#fefae0]"
+            className="fixed inset-0 z-50 bg-[#fefae0] overflow-y-auto"
           >
             <ServicesScreen
               onBack={() => setCurrentScreen("home")}
@@ -78,7 +78,7 @@ export default function Page() {
             initial="hidden"
             animate="visible"
             exit="exit"
-            className="fixed inset-0 z-50 bg-[#fefae0]"
+            className="fixed inset-0 z-50 bg-[#fefae0] overflow-y-auto"
           >
             <RegisterScreen
               onBack={() => setCurrentScreen("services")}
@@ -93,7 +93,7 @@ export default function Page() {
             initial="hidden"
             animate="visible"
             exit="exit"
-            className="fixed inset-0 z-50 bg-[#fefae0]"
+            className="fixed inset-0 z-50 bg-[#fefae0] overflow-y-auto"
           >
             <PetRegisterScreen
               onBack={() => setCurrentScreen("register")}
@@ -108,7 +108,7 @@ export default function Page() {
             initial="hidden"
             animate="visible"
             exit="exit"
-            className="fixed inset-0 z-50 bg-[#fefae0]"
+            className="fixed inset-0 z-50 bg-[#fefae0] overflow-y-auto"
           >
             <PetSelectionScreen onBack={() => setCurrentScreen("home")} user={currentUser} pets={userPets} />
           </motion.div>
@@ -120,7 +120,7 @@ export default function Page() {
             initial="hidden"
             animate="visible"
             exit="exit"
-            className="fixed inset-0 z-50 bg-[#fefae0]"
+            className="fixed inset-0 z-50 bg-[#fefae0] overflow-y-auto"
           >
             <ProfileScreen
               onBack={() => setCurrentScreen("home")}
@@ -137,7 +137,7 @@ export default function Page() {
             initial="hidden"
             animate="visible"
             exit="exit"
-            className="fixed inset-0 z-50 bg-[#fefae0]"
+            className="fixed inset-0 z-50 bg-[#fefae0] overflow-y-auto"
           >
             <AddPetScreen
               onBack={() => setCurrentScreen("profile")}
