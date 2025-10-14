@@ -11,11 +11,12 @@ import "./ui/home.css"
 
 interface PetSelectionScreenProps {
   onBack: () => void
+  onAddPet?: () => void
   user: User
   pets: Pet[]
 }
 
-export function PetSelectionScreen({ onBack, user, pets }: PetSelectionScreenProps) {
+export function PetSelectionScreen({ onBack, onAddPet, user, pets }: PetSelectionScreenProps) {
   const [selectedPet, setSelectedPet] = useState<string | null>(null)
   const [selectedTime, setSelectedTime] = useState<string | null>(null)
   const [specialCare, setSpecialCare] = useState("")
@@ -55,12 +56,20 @@ export function PetSelectionScreen({ onBack, user, pets }: PetSelectionScreenPro
     )
   }
 
+  const handlePetClick = (petId: string) => {
+    if (petId === "add") {
+      onAddPet?.()
+    } else {
+      setSelectedPet(petId)
+    }
+  }
+
   return (
     <div className="min-h-full bg-[#1d6fb8] pb-8">
-      <div className="voltar mt-16">
+      <div className="voltar">
         <button onClick={onBack} className="flex items-center gap-2 text-white">
           <ChevronLeft className="w-6 h-6" />
-          <span className="text-base">Voltar</span>
+          <span className="text-base">Voltar aos serviços</span>
         </button>
       </div>
 
@@ -73,7 +82,7 @@ export function PetSelectionScreen({ onBack, user, pets }: PetSelectionScreenPro
 
         {/* Service Card */}
         <div className="bg-white rounded-lg p-4 flex gap-4">
-          <img src="/dog-grooming.png" alt="Banho simples" className="w-20 h-20 rounded-lg object-cover" />
+          <img src="/golden-retriever.jpg" alt="Banho simples" className="w-20 h-20 rounded-lg object-cover" />
           <div>
             <h3 className="font-semibold text-[#0a4d8c]">Banho simples</h3>
             <p className="text-sm text-gray-600">Valor referente ao porte</p>
@@ -116,8 +125,8 @@ export function PetSelectionScreen({ onBack, user, pets }: PetSelectionScreenPro
             {displayPets.map((pet) => (
               <button
                 key={pet.id}
-                onClick={() => setSelectedPet(pet.id)}
-                className={`flex flex-col items-center gap-2 ${selectedPet === pet.id ? "opacity-100" : "opacity-60"}`}
+                onClick={() => handlePetClick(pet.id)}
+                className={`flex flex-col items-center gap-2 ${selectedPet === pet.id ? "opacity-100" : "opacity-60"} hover:opacity-100 transition-opacity`}
               >
                 {pet.image ? (
                   <img
@@ -126,7 +135,7 @@ export function PetSelectionScreen({ onBack, user, pets }: PetSelectionScreenPro
                     className="w-16 h-16 rounded-full object-cover border-2 border-white"
                   />
                 ) : (
-                  <div className="w-16 h-16 rounded-full bg-white border-2 border-white flex items-center justify-center text-2xl text-[#0a4d8c]">
+                  <div className="w-16 h-16 rounded-full bg-white border-2 border-white flex items-center justify-center text-2xl text-[#0a4d8c] hover:bg-gray-100 transition-colors">
                     +
                   </div>
                 )}

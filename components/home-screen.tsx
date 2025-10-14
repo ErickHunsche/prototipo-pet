@@ -17,7 +17,10 @@ export function HomeScreen({ onNavigate, onProfile }: HomeScreenProps) {
   }
 
   const handleVisit = () => {
-    window.open("https://www.google.com/maps/place/Roca+Sales/@-29.2859196,-51.8849486,17z/data=!3m1!4b1!4m6!3m5!1s0x951c5dd2615eae25:0x732655975902bf0a!8m2!3d-29.2859243!4d-51.8823737!16s%2Fg%2F11sy40msn5?entry=ttu&g_ep=EgoyMDI1MTAwOC4wIKXMDSoASAFQAw%3D%3D", "_blank")
+    window.open(
+      "https://www.google.com/maps/place/Roca+Sales/@-29.2859196,-51.8849486,17z/data=!3m1!4b1!4m6!3m5!1s0x951c5dd2615eae25:0x732655975902bf0a!8m2!3d-29.2859243!4d-51.8823737!16s%2Fg%2F11sy40msn5?entry=ttu&g_ep=EgoyMDI1MTAwOC4wIKXMDSoASAFQAw%3D%3D",
+      "_blank",
+    )
   }
 
   const handleShare = () => {
@@ -82,14 +85,16 @@ export function HomeScreen({ onNavigate, onProfile }: HomeScreenProps) {
         <h2>Selecione os serviço desejado</h2>
 
         <div className="space-y-3">
-          <ServiceItem image="/dog-grooming.png" title="Banho simples" subtitle="Valor referente ao porte" />
-          <ServiceItem
-            image="/dog-bath-hygiene.jpg"
-            title="Banho e Tosa higiênica"
-            subtitle="Valor referente ao porte"
-          />
-          <ServiceItem image="/pet-grooming.png" title="Tosagem" subtitle="Valor referente ao porte" />
-          <ServiceItem image="/pet-nail-trimming.png" title="Corte de unhas" subtitle="Valor referente ao porte" />
+          <ServiceItem image="/golden-retriever.jpg" title="Banho simples" subtitle="Valor referente ao porte" />
+          <ServiceItem image="/majestic-husky.jpg" title="Banho e Tosa higiênica" subtitle="Valor referente ao porte" />
+          <ServiceItem image="/brown-dog.jpg" title="Tosagem" subtitle="Valor referente ao porte" />
+          <ServiceItem image="/golden-retriever.jpg" title="Corte de unhas" subtitle="Valor referente ao porte" />
+          <ServiceItem image="/majestic-husky.jpg" title="Hospedagem" subtitle="Diária completa com cuidados" />
+          <ServiceItem image="/brown-dog.jpg" title="Banho medicinal" subtitle="Com produtos especiais" />
+          <ServiceItem image="/golden-retriever.jpg" title="Tosa bebê" subtitle="Corte delicado para filhotes" />
+          <ServiceItem image="/majestic-husky.jpg" title="Hidratação" subtitle="Tratamento para pelos" />
+          <ServiceItem image="/brown-dog.jpg" title="Limpeza de ouvidos" subtitle="Higiene completa" />
+          <ServiceItem image="/golden-retriever.jpg" title="Escovação de dentes" subtitle="Saúde bucal" />
         </div>
 
         <Button onClick={onNavigate} className="w-full mt-6 bg-[#fff] hover:bg-[#2d0909] text-black py-6 text-base">

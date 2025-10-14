@@ -8,16 +8,18 @@ import { PetRegisterScreen } from "@/components/pet-register-screen"
 import { PetSelectionScreen } from "@/components/pet-selection-screen"
 import { ProfileScreen } from "@/components/profile-screen"
 import { AddPetScreen } from "@/components/add-pet-screen"
+import { EditPetScreen } from "@/components/edit-pet-screen"
 import { mockUser, mockPets } from "@/lib/mock-data"
 import { AnimatePresence, motion } from "framer-motion"
 
 export default function Page() {
   const [currentScreen, setCurrentScreen] = useState<
-    "home" | "services" | "register" | "pet-register" | "pet-selection" | "profile" | "add-pet"
+    "home" | "services" | "register" | "pet-register" | "pet-selection" | "profile" | "add-pet" | "edit-pet"
   >("home")
   const [isLoggedIn, setIsLoggedIn] = useState(true)
   const [currentUser, setCurrentUser] = useState(mockUser)
   const [userPets, setUserPets] = useState(mockPets)
+  const [editingPetId, setEditingPetId] = useState<string | null>(null)
 
   const overlayVariants = {
     hidden: {
@@ -43,6 +45,11 @@ export default function Page() {
         duration: 0.2,
       },
     },
+  }
+
+  const handleEditPet = (petId: string) => {
+    setEditingPetId(petId)
+    setCurrentScreen("edit-pet")
   }
 
   return (
@@ -110,7 +117,12 @@ export default function Page() {
             exit="exit"
             className="fixed inset-0 z-50 bg-[#fefae0] overflow-y-auto"
           >
-            <PetSelectionScreen onBack={() => setCurrentScreen("home")} user={currentUser} pets={userPets} />
+            <PetSelectionScreen
+              onBack={() => setCurrentScreen("home")}
+              onAddPet={() => setCurrentScreen("add-pet")}
+              user={currentUser}
+              pets={userPets}
+            />
           </motion.div>
         )}
 
@@ -125,6 +137,7 @@ export default function Page() {
             <ProfileScreen
               onBack={() => setCurrentScreen("home")}
               onAddPet={() => setCurrentScreen("add-pet")}
+              onEditPet={handleEditPet}
               user={currentUser}
               pets={userPets}
             />
@@ -145,6 +158,21 @@ export default function Page() {
                 alert("PET salvo com sucesso!")
                 setCurrentScreen("profile")
               }}
+            />
+          </motion.div>
+        )}
+
+        {currentScreen === "edit-pet" && editingPetId && (
+          <motion.div
+            variants={overlayVariants}
+            initial="hidden"
+            animate="visible"
+            exit="exit"
+            className="fixed inset-0 z-50 bg-[#fefae0] overflow-y-auto"
+          >
+            <EditPetScreen
+              onBack={() => setCurrentScreen("profile")}
+              pet={userPets.find((p) => p.id === editingPetId)!}
             />
           </motion.div>
         )}

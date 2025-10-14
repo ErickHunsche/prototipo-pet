@@ -30,7 +30,7 @@ export function AddPetScreen({ onBack, onSave }: AddPetScreenProps) {
 
   return (
     <div className="min-h-full bg-[#1d6fb8] pb-8">
-      <div className="voltar mt-16">
+      <div className="voltar">
         <button onClick={onBack} className="flex items-center gap-2 text-white">
           <ChevronLeft className="w-6 h-6" />
           <span className="text-base">Voltar ao perfil</span>

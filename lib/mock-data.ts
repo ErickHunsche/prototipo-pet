@@ -5,6 +5,7 @@ export interface User {
   phone: string
   birthDate: string
   cpf: string
+  image?: string
 }
 
 export interface Pet {
@@ -36,6 +37,7 @@ export const mockUser: User = {
   phone: "(11) 98765-4321",
   birthDate: "15/03/1990",
   cpf: "123.456.789-00",
+  image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-qPvHgYE0FxwmcwdhygBHQb5lfswQpc.png",
 }
 
 // Pre-registered pets for the user
@@ -48,7 +50,7 @@ export const mockPets: Pet[] = [
     breed: "Golden Retriever",
     age: 3,
     size: "grande",
-    image: "/golden-retriever.png",
+    image: "/golden-retriever.jpg",
   },
   {
     id: "pet-2",
@@ -58,7 +60,7 @@ export const mockPets: Pet[] = [
     breed: "Husky Siberiano",
     age: 2,
     size: "grande",
-    image: "/majestic-husky.png",
+    image: "/majestic-husky.jpg",
   },
   {
     id: "pet-3",
@@ -68,7 +70,7 @@ export const mockPets: Pet[] = [
     breed: "Vira-lata",
     age: 5,
     size: "médio",
-    image: "/brown-dog.png",
+    image: "/brown-dog.jpg",
   },
 ]
 

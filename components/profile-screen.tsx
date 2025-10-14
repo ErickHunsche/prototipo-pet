@@ -1,6 +1,6 @@
 "use client"
 
-import { ChevronLeft, User, Mail, Phone, Calendar, FileText, Edit2 } from "lucide-react"
+import { ChevronLeft, User, Mail, Phone, Calendar, FileText, Edit2, Camera } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
 import type { User as UserType, Pet } from "@/lib/mock-data"
@@ -9,14 +9,15 @@ import "./ui/home.css"
 interface ProfileScreenProps {
   onBack: () => void
   onAddPet?: () => void
+  onEditPet?: (petId: string) => void
   user: UserType
   pets: Pet[]
 }
 
-export function ProfileScreen({ onBack, onAddPet, user, pets }: ProfileScreenProps) {
+export function ProfileScreen({ onBack, onAddPet, onEditPet, user, pets }: ProfileScreenProps) {
   return (
     <div className="min-h-full bg-[#1d6fb8] pb-8">
-      <div className="voltar mt-16">
+      <div className="voltar">
         <button onClick={onBack} className="flex items-center gap-2 text-white">
           <ChevronLeft className="w-6 h-6" />
           <span className="text-base">Voltar</span>
@@ -24,6 +25,22 @@ export function ProfileScreen({ onBack, onAddPet, user, pets }: ProfileScreenPro
       </div>
 
       <div className="p-6 max-w-4xl mx-auto space-y-6">
+        {/* User Profile Photo Section */}
+        <div className="flex justify-center mb-6">
+          <div className="relative">
+            <div className="w-32 h-32 rounded-full overflow-hidden bg-white border-4 border-white shadow-lg">
+              <img
+                src={user.image || "/placeholder.svg?height=128&width=128"}
+                alt={user.name}
+                className="w-full h-full object-cover"
+              />
+            </div>
+            <button className="absolute bottom-0 right-0 w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-lg border-2 border-[#1d6fb8] hover:bg-gray-50 transition-colors">
+              <Camera className="w-5 h-5 text-[#0a4d8c]" />
+            </button>
+          </div>
+        </div>
+
         {/* User Information Card */}
         <Card className="bg-white border-none shadow-sm">
           <div className="p-6">
@@ -101,7 +118,13 @@ export function ProfileScreen({ onBack, onAddPet, user, pets }: ProfileScreenPro
                   <div className="flex-1 min-w-0">
                     <div className="flex items-start justify-between mb-2">
                       <h3 className="text-lg font-bold text-[#0a4d8c]">{pet.name}</h3>
-                      <Button variant="ghost" size="icon" className="text-[#0a4d8c] hover:bg-blue-50 -mt-2 -mr-2">
+                      {/* Functional Edit Button */}
+                      <Button
+                        variant="ghost"
+                        size="icon"
+                        onClick={() => onEditPet?.(pet.id)}
+                        className="text-[#0a4d8c] hover:bg-blue-50 -mt-2 -mr-2"
+                      >
                         <Edit2 className="w-4 h-4" />
                       </Button>
                     </div>
