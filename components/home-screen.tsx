@@ -81,10 +81,10 @@ export function HomeScreen({ onNavigate, onProfile }: HomeScreenProps) {
       </div>
 
       {/* Services List */}
-      <div className="flex-1 bg-[#1d6fb8] p-6">
-        <h2>Selecione os serviço desejado</h2>
+      <div className="flex-1 bg-[#1d6fb8] p-6 flex flex-col">
+        <h2 className="mb-4">Selecione os serviço desejado</h2>
 
-        <div className="space-y-3">
+        <div className="flex-1 overflow-y-auto space-y-3 mb-4">
           <ServiceItem image="/golden-retriever.jpg" title="Banho simples" subtitle="Valor referente ao porte" />
           <ServiceItem image="/majestic-husky.jpg" title="Banho e Tosa higiênica" subtitle="Valor referente ao porte" />
           <ServiceItem image="/brown-dog.jpg" title="Tosagem" subtitle="Valor referente ao porte" />
@@ -97,7 +97,7 @@ export function HomeScreen({ onNavigate, onProfile }: HomeScreenProps) {
           <ServiceItem image="/golden-retriever.jpg" title="Escovação de dentes" subtitle="Saúde bucal" />
         </div>
 
-        <Button onClick={onNavigate} className="w-full mt-6 bg-[#fff] hover:bg-[#2d0909] text-black py-6 text-base">
+        <Button onClick={onNavigate} className="w-full bg-[#fff] hover:bg-[#2d0909] text-black py-6 text-base">
           Confirmar serviço
         </Button>
       </div>
