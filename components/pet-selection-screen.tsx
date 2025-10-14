@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { ChevronLeft, Calendar as CalendarIcon } from "lucide-react"
+import { ChevronLeft, CalendarIcon } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Popover, PopoverTrigger, PopoverContent } from "@/components/ui/popover"
 import { Calendar } from "@/components/ui/calendar"
@@ -48,14 +48,6 @@ export function PetSelectionScreen({ onBack, user, pets }: PetSelectionScreenPro
       ? date.toLocaleDateString("pt-BR", { day: "2-digit", month: "long", year: "numeric" })
       : "Data não selecionada"
 
-    console.log("[v0] Agendamento confirmado:", {
-      user: user.name,
-      pet: selectedPetData?.name,
-      date: formattedDate,
-      time: selectedTime,
-      specialCare: specialCare || "Nenhum",
-    })
-
     alert(
       `Agendamento confirmado!\n\nCliente: ${user.name}\nPet: ${selectedPetData?.name}\nData: ${formattedDate}\nHorário: ${selectedTime}${
         specialCare ? `\nCuidados especiais: ${specialCare}` : ""
@@ -64,18 +56,17 @@ export function PetSelectionScreen({ onBack, user, pets }: PetSelectionScreenPro
   }
 
   return (
-    <div className="min-h-screen bg-[#1d6fb8]">
-      {/* Header */}
-      <div className="voltar">
-        <button onClick={onBack}>
+    <div className="min-h-screen bg-[#1d6fb8] overflow-y-auto pb-8">
+      <div className="voltar mt-16">
+        <button onClick={onBack} className="flex items-center gap-2 text-white">
           <ChevronLeft className="w-6 h-6" />
+          <span className="text-base">Voltar</span>
         </button>
-        <span className="text-base">Voltar aos serviços</span>
       </div>
 
       <div className="p-6 space-y-6">
         <div className="text-center">
-          <p className="text-lg text-[#540804]">
+          <p className="text-lg text-white">
             Bem-vindo, <span className="font-semibold">{user.name}</span>!
           </p>
         </div>
@@ -84,21 +75,21 @@ export function PetSelectionScreen({ onBack, user, pets }: PetSelectionScreenPro
         <div className="bg-white rounded-lg p-4 flex gap-4">
           <img src="/dog-grooming.png" alt="Banho simples" className="w-20 h-20 rounded-lg object-cover" />
           <div>
-            <h3 className="font-semibold text-[#540804]">Banho simples</h3>
-            <p className="text-sm text-[#2d0909]">Valor referente ao porte</p>
+            <h3 className="font-semibold text-[#0a4d8c]">Banho simples</h3>
+            <p className="text-sm text-gray-600">Valor referente ao porte</p>
           </div>
         </div>
 
         {/* Date Display */}
         <div className="text-center space-y-3">
-          <p className="text-[#540804] font-medium">Selecione o dia disponível</p>
+          <p className="text-white font-medium">Selecione o dia disponível</p>
 
           <Popover>
             <PopoverTrigger asChild>
               <Button
                 variant="outline"
                 className={cn(
-                  "w-[250px] justify-center bg-white border border-[#d4a373] text-[#540804] hover:bg-[#e9edc9]",
+                  "w-[250px] justify-center bg-white border border-[#0a4d8c] text-[#0a4d8c] hover:bg-blue-50",
                   !date && "text-muted-foreground",
                 )}
               >
@@ -112,7 +103,7 @@ export function PetSelectionScreen({ onBack, user, pets }: PetSelectionScreenPro
                   : "Selecione uma data"}
               </Button>
             </PopoverTrigger>
-            <PopoverContent className="w-auto p-0 bg-white rounded-lg border border-[#d4a373]" align="center">
+            <PopoverContent className="w-auto p-0 bg-white rounded-lg border border-[#0a4d8c]" align="center">
               <Calendar mode="single" selected={date} onSelect={setDate} initialFocus />
             </PopoverContent>
           </Popover>
@@ -120,28 +111,26 @@ export function PetSelectionScreen({ onBack, user, pets }: PetSelectionScreenPro
 
         {/* Pet Selection */}
         <div>
-          <h3 className="font-semibold text-[#540804] mb-3">Selecione seu PET</h3>
+          <h3 className="font-semibold text-white mb-3">Selecione seu PET</h3>
           <div className="flex gap-4 flex-wrap">
             {displayPets.map((pet) => (
               <button
                 key={pet.id}
                 onClick={() => setSelectedPet(pet.id)}
-                className={`flex flex-col items-center gap-2 ${
-                  selectedPet === pet.id ? "opacity-100" : "opacity-60"
-                }`}
+                className={`flex flex-col items-center gap-2 ${selectedPet === pet.id ? "opacity-100" : "opacity-60"}`}
               >
                 {pet.image ? (
                   <img
                     src={pet.image || "/placeholder.svg"}
                     alt={pet.name}
-                    className="w-16 h-16 rounded-full object-cover border-2 border-[#d4a373]"
+                    className="w-16 h-16 rounded-full object-cover border-2 border-white"
                   />
                 ) : (
-                  <div className="w-16 h-16 rounded-full bg-white border-2 border-[#d4a373] flex items-center justify-center text-2xl text-[#d4a373]">
+                  <div className="w-16 h-16 rounded-full bg-white border-2 border-white flex items-center justify-center text-2xl text-[#0a4d8c]">
                     +
                   </div>
                 )}
-                <span className="text-sm text-[#540804]">{pet.name}</span>
+                <span className="text-sm text-white font-medium">{pet.name}</span>
               </button>
             ))}
           </div>
@@ -149,7 +138,7 @@ export function PetSelectionScreen({ onBack, user, pets }: PetSelectionScreenPro
 
         {/* Time Slots */}
         <div>
-          <h3 className="font-semibold text-[#540804] mb-3">Horários disponíveis</h3>
+          <h3 className="font-semibold text-white mb-3">Horários disponíveis</h3>
           <div className="space-y-2">
             {timeSlots.map((row, rowIndex) => (
               <div key={rowIndex} className="grid grid-cols-4 gap-2">
@@ -158,9 +147,7 @@ export function PetSelectionScreen({ onBack, user, pets }: PetSelectionScreenPro
                     key={time}
                     onClick={() => setSelectedTime(time)}
                     className={`py-2 rounded text-sm font-medium ${
-                      selectedTime === time
-                        ? "bg-[#d4a373] text-white"
-                        : "bg-white text-[#540804] hover:bg-[#e9edc9]"
+                      selectedTime === time ? "bg-[#0a4d8c] text-white" : "bg-white text-[#0a4d8c] hover:bg-blue-50"
                     }`}
                   >
                     {time}
@@ -173,22 +160,23 @@ export function PetSelectionScreen({ onBack, user, pets }: PetSelectionScreenPro
 
         {/* Cuidados especiais */}
         <div>
-          <label className="block text-sm text-[#540804] mb-2">Algum cuidado especial com o pet?</label>
+          <label className="block text-sm text-white mb-2">Algum cuidado especial com o pet?</label>
           <input
             type="text"
             value={specialCare}
             onChange={(e) => setSpecialCare(e.target.value)}
             placeholder="Ex: Alergia a produtos com perfume"
-            className="w-full px-4 py-2 rounded bg-white border border-[#d4a373] text-[#540804] placeholder:text-[#2d0909]/50"
+            className="w-full px-4 py-2 rounded bg-white border border-[#0a4d8c] text-[#0a4d8c] placeholder:text-gray-400"
           />
         </div>
 
         {/* Confirm Button */}
         <Button
           onClick={handleConfirmBooking}
-          className="w-full bg-[#fff] hover:bg-[#2d0909] text-black py-6 text-base"
+          disabled={!selectedPet || !selectedTime}
+          className="w-full bg-white hover:bg-gray-100 text-[#0a4d8c] py-6 text-base font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
         >
-          Confirmar Agendamento
+          CADASTRO
         </Button>
       </div>
     </div>

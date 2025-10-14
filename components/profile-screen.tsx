@@ -4,6 +4,7 @@ import { ChevronLeft, User, Mail, Phone, Calendar, FileText, Edit2 } from "lucid
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
 import type { User as UserType, Pet } from "@/lib/mock-data"
+import "./ui/home.css"
 
 interface ProfileScreenProps {
   onBack: () => void
@@ -14,29 +15,28 @@ interface ProfileScreenProps {
 
 export function ProfileScreen({ onBack, onAddPet, user, pets }: ProfileScreenProps) {
   return (
-    <div className="min-h-screen bg-[#fefae0]">
-      {/* Header */}
-      <header className="bg-[#540804] text-white p-4 flex items-center gap-3">
-        <button onClick={onBack} className="hover:opacity-80 transition-opacity">
+    <div className="min-h-screen bg-[#1d6fb8] overflow-y-auto pb-8">
+      <div className="voltar mt-16">
+        <button onClick={onBack} className="flex items-center gap-2 text-white">
           <ChevronLeft className="w-6 h-6" />
+          <span className="text-base">Voltar</span>
         </button>
-        <h1 className="text-lg font-semibold">Meu Perfil</h1>
-      </header>
+      </div>
 
       <div className="p-6 max-w-4xl mx-auto space-y-6">
         {/* User Information Card */}
         <Card className="bg-white border-none shadow-sm">
           <div className="p-6">
             <div className="flex items-center justify-between mb-6">
-              <h2 className="text-xl font-bold text-[#540804]">Informações Pessoais</h2>
-              <Button variant="ghost" size="icon" className="text-[#540804] hover:bg-[#fefae0]">
+              <h2 className="text-xl font-bold text-[#0a4d8c]">Informações Pessoais</h2>
+              <Button variant="ghost" size="icon" className="text-[#0a4d8c] hover:bg-blue-50">
                 <Edit2 className="w-4 h-4" />
               </Button>
             </div>
 
             <div className="space-y-4">
               <div className="flex items-start gap-3">
-                <User className="w-5 h-5 text-[#d4a373] mt-0.5" />
+                <User className="w-5 h-5 text-[#1d6fb8] mt-0.5" />
                 <div>
                   <p className="text-sm text-gray-500">Nome completo</p>
                   <p className="font-medium text-gray-900">{user.name}</p>
@@ -44,7 +44,7 @@ export function ProfileScreen({ onBack, onAddPet, user, pets }: ProfileScreenPro
               </div>
 
               <div className="flex items-start gap-3">
-                <Mail className="w-5 h-5 text-[#d4a373] mt-0.5" />
+                <Mail className="w-5 h-5 text-[#1d6fb8] mt-0.5" />
                 <div>
                   <p className="text-sm text-gray-500">E-mail</p>
                   <p className="font-medium text-gray-900">{user.email}</p>
@@ -52,7 +52,7 @@ export function ProfileScreen({ onBack, onAddPet, user, pets }: ProfileScreenPro
               </div>
 
               <div className="flex items-start gap-3">
-                <Phone className="w-5 h-5 text-[#d4a373] mt-0.5" />
+                <Phone className="w-5 h-5 text-[#1d6fb8] mt-0.5" />
                 <div>
                   <p className="text-sm text-gray-500">Telefone</p>
                   <p className="font-medium text-gray-900">{user.phone}</p>
@@ -60,7 +60,7 @@ export function ProfileScreen({ onBack, onAddPet, user, pets }: ProfileScreenPro
               </div>
 
               <div className="flex items-start gap-3">
-                <Calendar className="w-5 h-5 text-[#d4a373] mt-0.5" />
+                <Calendar className="w-5 h-5 text-[#1d6fb8] mt-0.5" />
                 <div>
                   <p className="text-sm text-gray-500">Data de nascimento</p>
                   <p className="font-medium text-gray-900">{user.birthDate}</p>
@@ -68,7 +68,7 @@ export function ProfileScreen({ onBack, onAddPet, user, pets }: ProfileScreenPro
               </div>
 
               <div className="flex items-start gap-3">
-                <FileText className="w-5 h-5 text-[#d4a373] mt-0.5" />
+                <FileText className="w-5 h-5 text-[#1d6fb8] mt-0.5" />
                 <div>
                   <p className="text-sm text-gray-500">CPF</p>
                   <p className="font-medium text-gray-900">{user.cpf}</p>
@@ -81,8 +81,11 @@ export function ProfileScreen({ onBack, onAddPet, user, pets }: ProfileScreenPro
         {/* Pets Section */}
         <div>
           <div className="flex items-center justify-between mb-4">
-            <h2 className="text-xl font-bold text-[#540804]">Meus PETs</h2>
-            <Button onClick={onAddPet} className="bg-[#d4a373] hover:bg-[#c49363] text-white rounded-full px-6">
+            <h2 className="text-xl font-bold text-white">Meus PETs</h2>
+            <Button
+              onClick={onAddPet}
+              className="bg-white hover:bg-gray-100 text-[#0a4d8c] rounded-full px-6 font-semibold"
+            >
               Adicionar PET
             </Button>
           </div>
@@ -97,8 +100,8 @@ export function ProfileScreen({ onBack, onAddPet, user, pets }: ProfileScreenPro
 
                   <div className="flex-1 min-w-0">
                     <div className="flex items-start justify-between mb-2">
-                      <h3 className="text-lg font-bold text-[#540804]">{pet.name}</h3>
-                      <Button variant="ghost" size="icon" className="text-[#540804] hover:bg-[#fefae0] -mt-2 -mr-2">
+                      <h3 className="text-lg font-bold text-[#0a4d8c]">{pet.name}</h3>
+                      <Button variant="ghost" size="icon" className="text-[#0a4d8c] hover:bg-blue-50 -mt-2 -mr-2">
                         <Edit2 className="w-4 h-4" />
                       </Button>
                     </div>
