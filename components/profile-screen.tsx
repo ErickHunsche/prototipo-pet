@@ -15,7 +15,7 @@ interface ProfileScreenProps {
 
 export function ProfileScreen({ onBack, onAddPet, user, pets }: ProfileScreenProps) {
   return (
-    <div className="min-h-screen bg-[#1d6fb8] overflow-y-auto pb-8">
+    <div className="min-h-full bg-[#1d6fb8] pb-8">
       <div className="voltar mt-16">
         <button onClick={onBack} className="flex items-center gap-2 text-white">
           <ChevronLeft className="w-6 h-6" />

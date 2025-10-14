@@ -17,7 +17,7 @@ export function HomeScreen({ onNavigate, onProfile }: HomeScreenProps) {
   }
 
   const handleVisit = () => {
-    window.open("https://maps.google.com/?q=Rua+das+Flores+123+São+Paulo+SP", "_blank")
+    window.open("https://www.google.com/maps/place/Roca+Sales/@-29.2859196,-51.8849486,17z/data=!3m1!4b1!4m6!3m5!1s0x951c5dd2615eae25:0x732655975902bf0a!8m2!3d-29.2859243!4d-51.8823737!16s%2Fg%2F11sy40msn5?entry=ttu&g_ep=EgoyMDI1MTAwOC4wIKXMDSoASAFQAw%3D%3D", "_blank")
   }
 
   const handleShare = () => {
@@ -28,7 +28,7 @@ export function HomeScreen({ onNavigate, onProfile }: HomeScreenProps) {
         url: window.location.href,
       })
     } else {
-      alert("Centro-PET\nRua das Flores, 123 - São Paulo, SP\nTelefone: (11) 98765-4321")
+      alert("Centro-PET\nRua das Flores, 123 - São Paulo, SP\nTelefone: (51) 99912-9161")
     }
   }
 
