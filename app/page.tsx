@@ -9,12 +9,21 @@ import { PetSelectionScreen } from "@/components/pet-selection-screen"
 import { ProfileScreen } from "@/components/profile-screen"
 import { AddPetScreen } from "@/components/add-pet-screen"
 import { EditPetScreen } from "@/components/edit-pet-screen"
+import { HospedagemScreen } from "@/components/hospedagem-screen"
 import { mockUser, mockPets } from "@/lib/mock-data"
 import { AnimatePresence, motion } from "framer-motion"
 
 export default function Page() {
   const [currentScreen, setCurrentScreen] = useState<
-    "home" | "services" | "register" | "pet-register" | "pet-selection" | "profile" | "add-pet" | "edit-pet"
+    | "home"
+    | "services"
+    | "register"
+    | "pet-register"
+    | "pet-selection"
+    | "profile"
+    | "add-pet"
+    | "edit-pet"
+    | "hospedagem"
   >("home")
   const [isLoggedIn, setIsLoggedIn] = useState(true)
   const [currentUser, setCurrentUser] = useState(mockUser)
@@ -55,7 +64,11 @@ export default function Page() {
   return (
     <div className="min-h-screen bg-[#fefae0] relative overflow-hidden">
       {/* Home screen always rendered as base */}
-      <HomeScreen onNavigate={() => setCurrentScreen("pet-selection")} onProfile={() => setCurrentScreen("profile")} />
+      <HomeScreen
+        onNavigate={() => setCurrentScreen("pet-selection")}
+        onNavigateHospedagem={() => setCurrentScreen("hospedagem")}
+        onProfile={() => setCurrentScreen("profile")}
+      />
 
       <AnimatePresence>
         {currentScreen === "services" && (
@@ -76,6 +89,18 @@ export default function Page() {
                 }
               }}
             />
+          </motion.div>
+        )}
+
+        {currentScreen === "hospedagem" && (
+          <motion.div
+            variants={overlayVariants}
+            initial="hidden"
+            animate="visible"
+            exit="exit"
+            className="fixed inset-0 z-50 bg-[#fefae0] overflow-y-auto"
+          >
+            <HospedagemScreen onBack={() => setCurrentScreen("home")} />
           </motion.div>
         )}
 
