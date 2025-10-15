@@ -168,18 +168,6 @@ function LodgingSection({ onNavigate }: { onNavigate: () => void }) {
           availability="Disponível"
         />
         <LodgingItem
-          image="/brown-dog.jpg"
-          title="Hospedagem premium"
-          subtitle="Suíte individual com câmera"
-          availability="Disponível"
-        />
-        <LodgingItem
-          image="/golden-retriever.jpg"
-          title="Hospedagem day care"
-          subtitle="Período diurno com atividades"
-          availability="Disponível"
-        />
-        <LodgingItem
           image="/majestic-husky.jpg"
           title="Hospedagem com banho"
           subtitle="Inclui banho ao final da estadia"
